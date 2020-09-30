@@ -1,0 +1,64 @@
+* {
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
+.my-headers-block {
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+.my-icon-label {
+    float: left;
+    padding-right: 10px;
+    padding-top: 6px;
+}
+.my-input {
+    width: 80%;
+    height: 30px;
+    padding-left: 5px;
+}
+
+.my-add-task {
+    margin-left: -6px;
+    height: 30px;
+    border-radius: 0 5px 5px 0;
+}
+.my-list-dark {
+    background-color: #999999;
+}
+
+.my-data {
+    height: 100%;
+    border-right: 1px solid gray;
+    border-left: 4px double gray;
+}
+/*.my-list
+{
+    padding-bottom: 0;
+    padding-top: 0;
+}*/
+.my-list:hover {
+    background-color: RGB(249, 201, 16);;
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
+}
+
+.my-checkbox {
+    padding-left: 40%;
+}
+.my-edit {
+    width: 8px;
+}
+.my-up-down {
+    display: flex;
+    color: gray;
+}
+.my-color {
+    color: gray;
+}
+.my-up-down-hover:hover {
+    text-decoration: none;
+    color: gray;
+}

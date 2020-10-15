@@ -1,0 +1,86 @@
+<div class="my-headers-block">
+  <h1 class="text-center">SIMPLE TODO LIST</h1>
+  <p class="text-center">FROM RUBY GARAGE</p>
+</div>
+
+<div class="justify-content-center">
+  <% @todo.each do |t| %>
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-action active my-pointer">
+        <div class="row vertical-align">
+          <div class="col-xs-11 b">
+            <span class="material-icons my-icon-label">assignment</span>
+            <h4><%= t.title %></h4>
+          </div>
+          <div class="descr">
+            <div class="col-xs-1 my-edit">
+              <%= link_to '', edit_todo_path(t), class: "glyphicon glyphicon-pencil my-edit-title-button my-border-link" %>
+            </div>
+            <div class="col-xs-1 my-edit">
+              <%= link_to '', todo_path(t),
+                          method: :delete,
+                          data: {confirm: 'Are you sure?'}, class: "glyphicon glyphicon-trash my-edit-title-button" %>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-group-item my-list-dark">
+        <div class="row vertical-align">
+          <div class="col-sm-1 my-edit">
+            <span class="glyphicon glyphicon-plus"></span>
+          </div>
+          <div class="col-sm-11 d-inline-flex w-100">
+            <%= form_with(model: [t, t.lists.build], local: true) do |f| %>
+              <%= f.text_field :item, placeholder: "Start typing here to create a task", class: "my-input custom-file-input" %>
+              <%= f.submit "Add Task", class: "btn btn-success my-add-task my-pointer" %>
+            <% end %>
+          </div>
+        </div>
+      </li>
+
+      <% t.lists.each do |c| %>
+        <% if c.item != nil %>
+          <li class="list-group-item list-group-item-action my-list my-pointer">
+            <div class="row vertical-align">
+
+              <div class="col-sm-1">
+                <div class="my-checkbox">
+                  <input type="checkbox">
+                </div>
+              </div>
+
+              <div class="col-xs-10 my-data b">
+                <%= c.item %>
+              </div>
+              <div class="descr vertical-align">
+                <div class="col-xs-1 my-edit my-block-updown">
+                  <%= link_to '', [c.todo, c], class: "glyphicon glyphicon-chevron-up my-up-down my-up-down-hover my-color " %>
+                  <%= link_to '', [c.todo, c], class: "glyphicon glyphicon-chevron-down my-up-down my-up-down-hover my-color " %>
+                </div>
+
+                <div class="col-xs-1 my-edit">
+                  <%= link_to '', edit_todo_list_path(t, c), class: "glyphicon glyphicon-pencil my-up-down-hover my-color my-border-link-gray" %>
+                </div>
+
+                <div class="col-xs-1 my-edit">
+                  <%= link_to '', [c.todo, c], method: :delete, data: {confirm: "Are you sure?"}, class: "glyphicon glyphicon-trash my-up-down-hover my-color my-border-link-gray" %>
+                </div>
+
+              </div>
+            </div>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
+
+<div class="fixed-bottom">
+  <div>
+    <p class="text-center">
+      <%= link_to '+ Add TODO List', new_todo_path, class: "btn btn-primary my-add-todo-list my-pointer" %>
+    </p>
+    <p class="text-center"> &COPY; Ruby Garage </p>
+  </div>
+</div>

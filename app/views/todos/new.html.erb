@@ -1,0 +1,27 @@
+<div class="my-headers-block">
+  <h1 class="text-center">Create list</h1>
+</div>
+
+<%=form_with scope: :todo, url: todos_path, local: true do |f| %>
+
+    <% if @todo.errors.any? %>
+      <div id="error_explanation" class="my-new-error">
+        <h2>
+          <%= pluralize(@todo.errors.count, "error") %> prohibited
+          this list from being saved:
+        </h2>
+        <ul>
+          <% @todo.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="my-table-create">
+      <%= f.text_field :title, placeholder: "Start typing here to create a TODO List", class: "form-control" %>
+      <div class="my-submit-new-todo">
+        <%= f.submit "Add TODO List", class: "btn btn-success" %>
+      </div>
+    </div>
+  <% end %>

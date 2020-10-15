@@ -1,0 +1,12 @@
+<div class="my-headers-block">
+  <h1 class="text-center">Editing item</h1>
+</div>
+
+<%= form_with model: [@list.todo, @list], local: true do |f| %>
+  <div class="my-table-create">
+    <%= f.text_field :item, placeholder: "Start typing here to create a TODO List", class: "form-control" %>
+    <div class="my-submit-new-todo">
+      <%= f.submit "Edit TODO Item", class: "btn btn-success" %>
+    </div>
+  </div>
+<% end %>

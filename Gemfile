@@ -30,7 +30,6 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'sqlite3', '~> 1.4'
-  ruby '2.7.1'
 end
 
 group :development do
@@ -51,9 +50,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'twitter-bootstrap-rails'
 
 group :production do
-  gem 'pg', '0.15.1'
+  gem 'pg'
   gem 'rails_12factor'
-  ruby '3.1.4'
 end
 
+ruby '2.7.1'
 

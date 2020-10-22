@@ -10,30 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_11_212330) do
-
-  create_table "items", force: :cascade do |t|
-    t.string "item"
-    t.integer "title_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["title_id"], name: "index_items_on_title_id"
-  end
+ActiveRecord::Schema.define(version: 2020_10_22_144444) do
 
   create_table "lists", force: :cascade do |t|
     t.string "item"
     t.integer "todo_id", null: false
+    t.integer "priority", default: 100, null: false
+    t.datetime "completed_ad"
+    t.date "dline"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["todo_id"], name: "index_lists_on_todo_id"
-  end
-
-  create_table "todoitems", force: :cascade do |t|
-    t.string "body"
-    t.integer "todo_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["todo_id"], name: "index_todoitems_on_todo_id"
   end
 
   create_table "todos", force: :cascade do |t|
@@ -42,7 +29,5 @@ ActiveRecord::Schema.define(version: 2020_10_11_212330) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "items", "titles"
   add_foreign_key "lists", "todos"
-  add_foreign_key "todoitems", "todos"
 end

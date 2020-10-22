@@ -2,6 +2,7 @@ class TodosController < ApplicationController
 
   def index
     @todo = Todo.all
+    @list = @todo.all.order('priority DESC')
   end
 
   def new
@@ -43,6 +44,9 @@ class TodosController < ApplicationController
     redirect_to todos_path
   end
 
+  def up
+
+  end
   private
 
   def todo_params

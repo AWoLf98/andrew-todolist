@@ -3,6 +3,12 @@
   margin: 0 0 0 0;
 }
 
+/*body {*/
+/*  background: url("background.jpg") 100% 100% no-repeat;*/
+/*  background-size: cover;*/
+/*  backdrop-filter: blur(8px);*/
+/*}*/
+
 .my-headers-block {
   padding-top: 10px;
   padding-bottom: 20px;
@@ -23,6 +29,8 @@
   margin-left: -5px;
   height: 30px;
   border-radius: 0 5px 5px 0;
+  padding-right: 5px;
+  padding-left: 3px;
 }
 
 .my-list-dark {
@@ -118,6 +126,25 @@
 
 .my-pointer {
   cursor: pointer;
+}
+
+.my-super-checkbox {
+  color: black;
+}
+.my-super-checkbox:hover {
+  color: black;
+  text-decoration: none;
+}
+
+.form-inline {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.my-date {
+  height: 30px;
+
 }
 
 /*# sourceMappingURL=custom.css.map */

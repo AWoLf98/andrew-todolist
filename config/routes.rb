@@ -1,8 +1,18 @@
 Rails.application.routes.draw do
   get 'todos/index'
 
+
+  get '/todos/:todo_id/lists/:id/up', to: 'lists#up'
+  get '/todos/:todo_id/lists/:id/up', to: 'lists#down'
+
   resources :todos do
-    resources :lists
+    resources :lists do
+      member do
+        patch :complete
+        patch :up
+        patch :down
+      end
+    end
   end
 
   root 'todos#index'

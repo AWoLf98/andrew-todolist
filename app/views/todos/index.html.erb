@@ -18,7 +18,7 @@
             </div>
             <div class="col-xs-1 my-edit">
               <%= link_to '', todo_path(t),
-                          method: :delete,
+                          method: :delete, remote: true,
                           data: {confirm: 'Are you sure?'}, class: "glyphicon glyphicon-trash my-edit-title-button" %>
             </div>
           </div>
@@ -30,46 +30,84 @@
           <div class="col-sm-1 my-edit">
             <span class="glyphicon glyphicon-plus"></span>
           </div>
-          <div class="col-sm-11 d-inline-flex w-100">
-            <%= form_with(model: [t, t.lists.build], local: true) do |f| %>
-              <%= f.text_field :item, placeholder: "Start typing here to create a task", class: "my-input custom-file-input" %>
-              <%= f.submit "Add Task", class: "btn btn-success my-add-task my-pointer" %>
-            <% end %>
-          </div>
+          <%= form_with(model: [t, t.lists.build], remote: true, class: "form-inline col-sm-12") do |f| %>
+            <%= f.date_field :dline, class: "my-date" %>
+            <%= f.text_field :item, placeholder: "Start typing here to create a task", class: "my-input custom-file-input float-right" %>
+            <%= f.submit "Add Task", class: "btn-success my-add-task my-pointer" %>
+          <% end %>
         </div>
       </li>
 
-      <% t.lists.each do |c| %>
+      <% t.lists.order('priority').each do |c| %>
         <% if c.item != nil %>
-          <li class="list-group-item list-group-item-action my-list my-pointer">
-            <div class="row vertical-align">
+          <% if c.completed? %>
+            <li class="list-group-item list-group-item-action my-list my-pointer">
+              <div class="row vertical-align">
+                <div class="col-sm-1">
+                  <div class="my-checkbox">
+                    <%= link_to '', complete_todo_list_path(c.todo, c), method: :patch, class: "glyphicon glyphicon-check my-super-checkbox" %>
+                  </div>
+                </div>
 
-              <div class="col-sm-1">
-                <div class="my-checkbox">
-                  <input type="checkbox">
+                <div class="col-xs-10 my-data b">
+                  <strike>
+                    <%= c.item %>
+                    <% if c.dline != nil %>
+                      Deadline: <%= c.dline %>
+                    <% end %>
+                  </strike>
+                </div>
+                <div class="descr vertical-align">
+                  <div class="col-xs-1 my-edit my-block-updown">
+                    <%= link_to '', up_todo_list_path(c.todo, c), remote: true, method: :patch, class: "glyphicon glyphicon-chevron-up my-up-down my-up-down-hover my-color " %>
+                    <%= link_to '', down_todo_list_path(c.todo, c), remote: true, method: :patch, class: "glyphicon glyphicon-chevron-down my-up-down my-up-down-hover my-color " %>
+                  </div>
+
+                  <div class="col-xs-1 my-edit">
+                    <%= link_to '', edit_todo_list_path(t, c), class: "glyphicon glyphicon-pencil my-up-down-hover my-color my-border-link-gray" %>
+                  </div>
+
+                  <div class="col-xs-1 my-edit">
+                    <%= link_to '', [c.todo, c], method: :delete, data: {confirm: "Are you sure?"}, remote: true, class: "glyphicon glyphicon-trash my-up-down-hover my-color my-border-link-gray" %>
+                  </div>
+
                 </div>
               </div>
+            </li>
+          <% else %>
+            <li class="list-group-item list-group-item-action my-list my-pointer">
+              <div class="row vertical-align">
 
-              <div class="col-xs-10 my-data b">
-                <%= c.item %>
+                <div class="col-sm-1">
+                  <div class="my-checkbox">
+                    <%= link_to '', complete_todo_list_path(c.todo, c), remote: true, method: :patch, class: "glyphicon glyphicon-unchecked my-super-checkbox" %>
+                  </div>
+                </div>
+
+                <div class="col-xs-10 my-data b">
+                  <%= c.item %>
+                  <% if c.dline != nil %>
+                    Deadline: <%= c.dline %>
+                  <% end %>
+                </div>
+                <div class="descr vertical-align">
+                  <div class="col-xs-1 my-edit my-block-updown">
+                    <%= link_to '', up_todo_list_path(c.todo, c), remote: true, method: :patch, class: "glyphicon glyphicon-chevron-up my-up-down my-up-down-hover my-color " %>
+                    <%= link_to '', down_todo_list_path(c.todo, c), remote: true, method: :patch, class: "glyphicon glyphicon-chevron-down my-up-down my-up-down-hover my-color " %>
+                  </div>
+
+                  <div class="col-xs-1 my-edit">
+                    <%= link_to '', edit_todo_list_path(t, c), class: "glyphicon glyphicon-pencil my-up-down-hover my-color my-border-link-gray" %>
+                  </div>
+
+                  <div class="col-xs-1 my-edit">
+                    <%= link_to '', [c.todo, c], method: :delete, data: {confirm: "Are you sure?"}, remote: true, class: "glyphicon glyphicon-trash my-up-down-hover my-color my-border-link-gray" %>
+                  </div>
+
+                </div>
               </div>
-              <div class="descr vertical-align">
-                <div class="col-xs-1 my-edit my-block-updown">
-                  <%= link_to '', [c.todo, c], class: "glyphicon glyphicon-chevron-up my-up-down my-up-down-hover my-color " %>
-                  <%= link_to '', [c.todo, c], class: "glyphicon glyphicon-chevron-down my-up-down my-up-down-hover my-color " %>
-                </div>
-
-                <div class="col-xs-1 my-edit">
-                  <%= link_to '', edit_todo_list_path(t, c), class: "glyphicon glyphicon-pencil my-up-down-hover my-color my-border-link-gray" %>
-                </div>
-
-                <div class="col-xs-1 my-edit">
-                  <%= link_to '', [c.todo, c], method: :delete, data: {confirm: "Are you sure?"}, class: "glyphicon glyphicon-trash my-up-down-hover my-color my-border-link-gray" %>
-                </div>
-
-              </div>
-            </div>
-          </li>
+            </li>
+          <% end %>
         <% end %>
       <% end %>
     </ul>

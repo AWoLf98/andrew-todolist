@@ -3,7 +3,13 @@
 one:
   item: MyString
   todo: one
+  priority: 1
+  completed_ad: 2020-10-22 17:44:44
+  dline: 2020-10-22
 
 two:
   item: MyString
   todo: two
+  priority: 1
+  completed_ad: 2020-10-22 17:44:44
+  dline: 2020-10-22
